@@ -1,11 +1,11 @@
 return { 
     {
-        "catppuccin/nvim", 
-	name = "catppuccin",
+        "sblauen/chalk", 
+	name = "chalk",
 	lazy = false,
 	priority = 1000,
 	config = function ()
-		vim.cmd([[colorscheme catppuccin]])
+		vim.cmd([[colorscheme chalk]])
 	end,
     },
 }
