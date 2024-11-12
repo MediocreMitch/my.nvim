@@ -8,5 +8,12 @@ return {
 			vim.cmd('hi Normal guibg=None')
 		end
 	},
+	{
+		'xiyaowong/transparent.nvim',
+		config = function()
+			require('transparent').setup()
+			vim.cmd('TransparentEnable')
+		end
+	}
 }
 
