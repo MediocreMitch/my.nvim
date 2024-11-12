@@ -1,12 +1,12 @@
 return { 
-    {
-        "sblauen/chalk", 
-	name = "chalk",
-	lazy = false,
-	priority = 1000,
-	config = function ()
-		vim.cmd([[colorscheme chalk]])
-	end,
-    },
+	{
+		'daneofmanythings/chalktone.nvim',
+		priority = 1000,
+		config = function()
+			require('chalktone').setup()
+			vim.cmd('colorscheme chalktone')
+			vim.cmd('hi Normal guibg=None')
+		end
+	},
 }
 
