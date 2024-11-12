@@ -5,6 +5,19 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 require('config.lazy')
 
+--
+--
+--	Fern Config
+--
+--
+
+vim.g['fern#renderer'] = "nerdfont"
+
+--
+--
+-- 		wf key mappings
+--
+--
 local which_key = require("wf.builtin.which_key")
 local register = require("wf.builtin.register")
 local bookmark = require("wf.builtin.bookmark")
