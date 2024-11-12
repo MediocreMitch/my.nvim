@@ -5,75 +5,21 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 require('config.lazy')
 
---
---
---	Fern Config
---
---
+local wilder = require('wilder')
+wilder.set_option('renderer', wilder.popupmenu_renderer({
+  highlighter = wilder.basic_highlighter(),
+  left = {' ', wilder.popupmenu_devicons()},
+  right = {' ', wilder.popupmenu_scrollbar()},
 
-vim.g['fern#renderer'] = "nerdfont"
+}))
 
---
---
--- 		wf key mappings
---
---
-local which_key = require("wf.builtin.which_key")
-local register = require("wf.builtin.register")
-local bookmark = require("wf.builtin.bookmark")
-local buffer = require("wf.builtin.buffer")
-local mark = require("wf.builtin.mark")
-
--- Register
-vim.keymap.set(
-  "n",
-  "<Space>wr",
-  -- register(opts?: table) -> function
-  -- opts?: option
-  register(),
-  { noremap = true, silent = true, desc = "[wf.nvim] register" }
-)
-
--- Bookmark
-vim.keymap.set(
-  "n",
-  "<Space>wbo",
-  -- bookmark(bookmark_dirs: table, opts?: table) -> function
-  -- bookmark_dirs: directory or file paths
-  -- opts?: option
-  bookmark({
-    nvim = "~/.config/nvim",
-    zsh = "~/.zshrc",
-  }),
-  { noremap = true, silent = true, desc = "[wf.nvim] bookmark" }
-)
-
--- Buffer
-vim.keymap.set(
-  "n",
-  "<Space>wbu",
-  -- buffer(opts?: table) -> function
-  -- opts?: option
-  buffer(),
-  {noremap = true, silent = true, desc = "[wf.nvim] buffer"}
-)
-
--- Mark
-vim.keymap.set(
-  "n",
-  "'",
-  -- mark(opts?: table) -> function
-  -- opts?: option
-  mark(),
-  { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] mark"}
-)
-
--- Which Key
-vim.keymap.set(
-  "n",
-  "<Leader>",
-   -- mark(opts?: table) -> function
-   -- opts?: option
-  which_key({ text_insert_in_advance = "<Leader>" }),
-  { noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
-)
+wilder.set_option('renderer', wilder.popupmenu_renderer(
+  wilder.popupmenu_border_theme({
+	  highlights = {
+	      border = 'Normal', -- highlight to use for the border
+	  },
+	  -- 'single', 'double', 'rounded' or 'solid'
+	  -- can also be a list of 8 characters, see :h wilder#popupmenu_border_theme() for more details
+	  border = 'rounded'
+  })
+))
