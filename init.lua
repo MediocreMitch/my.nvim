@@ -4,19 +4,23 @@ vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 require("config.lazy")
+
 --
 --
 -- LSP/Formatter Setup
 --
 --
+vim.o.completeopt = "menuone,noselect,noinsert,popup"
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+require("config.lua_ls")
 
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "yapf" },
+		json = { "prettier" },
 	},
 })
 
