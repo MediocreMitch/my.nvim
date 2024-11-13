@@ -3,7 +3,7 @@ return {
 	opts = {
 		disable_netrw = true,
 		filters = {
-			dotfiles = false,
+			enable = false,
 		},
 		renderer = {
 			hidden_display = "all",
