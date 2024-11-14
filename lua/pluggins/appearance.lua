@@ -13,4 +13,8 @@ return {
 		event = "VeryLazy",
 	},
 	"nvim-tree/nvim-tree.lua",
+	{
+		"TaDaa/vimade",
+		event = "VeryLazy",
+	},
 }
