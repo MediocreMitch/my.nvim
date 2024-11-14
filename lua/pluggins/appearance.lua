@@ -2,12 +2,15 @@ return {
 	"daneofmanythings/chalktone.nvim",
 	{
 		"brenoprata10/nvim-highlight-colors",
-		lazy = true,
+		event = "VeryLazy",
 	},
 	{
 		"stevearc/conform.nvim",
-		lazy = true,
+		event = "VeryLazy",
 	},
-	"echasnovski/mini.icons",
+	{
+		"echasnovski/mini.icons",
+		event = "VeryLazy",
+	},
 	"nvim-tree/nvim-tree.lua",
 }

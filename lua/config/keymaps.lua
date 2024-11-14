@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<leader>/", ":noh<cr>")
+
 --
 --
 --	Nvim Tree Remap
