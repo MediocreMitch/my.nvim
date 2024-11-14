@@ -1,5 +1,5 @@
 ---
--- LSP setup
+-- LSP Config
 ---
 
 -- Reserve a space in the gutter
@@ -106,4 +106,33 @@ cmp.setup({
 			vim.snippet.expand(args.body)
 		end,
 	},
+	formatting = {
+		format = function(entry, item)
+			return require("nvim-highlight-colors").format(entry, item)
+		end,
+	},
+	performance = {
+		max_view_entries = 10,
+	},
+})
+
+--
+--
+-- Formatter Config
+--
+--
+
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		python = { "yapf" },
+		json = { "prettier" },
+	},
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
 })
