@@ -11,13 +11,42 @@ require("chalktone").setup()
 vim.cmd("colorscheme chalktone")
 
 -- Make backgrounds clear
-local higroups = { "Normal", "Float", "NormalNC" }
+local higroups = {
+	"Normal",
+	"Float",
+	"NormalNC",
+	"VertSplit",
+	"SignColumn",
+}
 local remove_background = function(list)
 	for _, bg in ipairs(list) do
 		vim.cmd("hi " .. bg .. " guibg=None")
 	end
 end
 remove_background(higroups)
+
+-- Remove status bar at bottom to clean up the appearance
+vim.cmd("set laststatus=0")
+-- Winbar at top to still get a small amount of info for each window
+vim.cmd("hi MyWinbar guibg=None guifg=#f58433")
+vim.cmd("set winbar=%#MyWinbar#%n\\ %f\\ %y\\ %m%r%=%-14.(%l,%c%V%)\\ %P\\/%L")
+-- Changing split apprarances
+local splitchanges = {
+	"vert: ",
+	"vertright: ",
+	"vertleft: ",
+	"verthoriz: ",
+	"horiz: ",
+	"horizup: ",
+	"horizdown: ",
+	"eob: ",
+}
+local changesplits = function(list)
+	for _, sc in ipairs(list) do
+		vim.cmd("set fillchars+=" .. sc)
+	end
+end
+changesplits(splitchanges)
 
 -- Fade unfocused windows to help keep track of current window
 require("vimade").setup({
@@ -52,6 +81,9 @@ require("nvim-tree").setup({
 	filters = {
 		enable = false,
 	},
+	view = {
+		width = 35,
+	},
 	renderer = {
 		icons = {
 			web_devicons = mini.mock_nvim_web_devicons(),
@@ -62,6 +94,12 @@ require("nvim-tree").setup({
 		indent_markers = {
 			enable = true,
 		},
+	},
+	modified = {
+		enable = true,
+	},
+	diagnostics = {
+		enable = true,
 	},
 })
 
