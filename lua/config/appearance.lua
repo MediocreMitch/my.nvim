@@ -17,6 +17,7 @@ local higroups = {
 	"NormalNC",
 	"VertSplit",
 	"SignColumn",
+	"Terminal",
 }
 local remove_background = function(list)
 	for _, bg in ipairs(list) do
