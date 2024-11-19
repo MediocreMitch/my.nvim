@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 require("mason").setup({})
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"lua_ls",
@@ -42,10 +43,13 @@ require("mason-lspconfig").setup({
 	automatic_installation = true,
 	handlers = {
 		function(server_name)
-			require("lspconfig")[server_name].setup({})
+			require("lspconfig")[server_name].setup({
+				capabilities = capabilities,
+			})
 		end,
 		["lua_ls"] = function()
 			require("lspconfig").lua_ls.setup({
+				capabilities = capabilities,
 				on_init = function(client)
 					if client.workspace_folders then
 						local path = client.workspace_folders[1].name
