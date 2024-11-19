@@ -1,5 +1,4 @@
 return {
-	"gelguy/wilder.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
