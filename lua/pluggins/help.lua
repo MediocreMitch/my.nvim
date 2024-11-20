@@ -9,4 +9,7 @@ return {
 			"polirritmico/telescope-lazy-plugins.nvim",
 		},
 	},
+	{
+		"folke/which-key.nvim",
+	},
 }
