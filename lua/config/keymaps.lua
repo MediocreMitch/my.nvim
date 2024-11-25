@@ -2,6 +2,47 @@ vim.keymap.set("n", "<leader>/", ":noh<cr>")
 
 --
 --
+-- Window Navigation
+--
+--
+vim.keymap.set("n", "<C-h>", function()
+	local prev_win = vim.api.nvim_get_current_win()
+	vim.cmd([[wincmd h]])
+	local current_win = vim.api.nvim_get_current_win()
+	if prev_win == current_win then
+		vim.fn.system("wezterm cli activate-pane-direction Left")
+	end
+end)
+
+vim.keymap.set("n", "<C-l>", function()
+	local prev_win = vim.api.nvim_get_current_win()
+	vim.cmd([[wincmd l]])
+	local current_win = vim.api.nvim_get_current_win()
+	if prev_win == current_win then
+		vim.fn.system("wezterm cli activate-pane-direction Right")
+	end
+end)
+
+vim.keymap.set("n", "<C-k>", function()
+	local prev_win = vim.api.nvim_get_current_win()
+	vim.cmd([[wincmd k]])
+	local current_win = vim.api.nvim_get_current_win()
+	if prev_win == current_win then
+		vim.fn.system("wezterm cli activate-pane-direction Up")
+	end
+end)
+
+vim.keymap.set("n", "<C-j>", function()
+	local prev_win = vim.api.nvim_get_current_win()
+	vim.cmd([[wincmd j]])
+	local current_win = vim.api.nvim_get_current_win()
+	if prev_win == current_win then
+		vim.fn.system("wezterm cli activate-pane-direction Down")
+	end
+end)
+
+--
+--
 --	Nvim Tree Remap
 --
 --
