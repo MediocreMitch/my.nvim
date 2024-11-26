@@ -2,9 +2,23 @@ vim.keymap.set("n", "<leader>/", ":noh<cr>")
 
 --
 --
+-- Neovide Key Remaps
+--
+--
+
+if vim.g.neovide then
+	vim.g.neovide_profiler = false
+	vim.keymap.set("n", "<leader>``", function()
+		vim.g.neovide_profiler = not vim.g.neovide_profiler
+	end)
+end
+
+--
+--
 -- Window Navigation
 --
 --
+
 vim.keymap.set("n", "<C-h>", function()
 	local prev_win = vim.api.nvim_get_current_win()
 	vim.cmd([[wincmd h]])
