@@ -3,6 +3,41 @@ return {
 		"daneofmanythings/chalktone.nvim",
 	},
 	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("hlchunk").setup({
+				chunk = {
+					enable = true,
+					chars = {
+						horizontal_line = "─",
+						vertical_line = "│",
+						left_top = "┌",
+						left_bottom = "└",
+						right_arrow = "─",
+					},
+					style = "#00ffff",
+				},
+			})
+		end,
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "LspAttach",
+		priority = 2500, -- needs to be loaded in first
+		config = function()
+			require("tiny-inline-diagnostic").setup({
+				preset = "modern",
+				multilines = true,
+			})
+			vim.diagnostic.config({ virtual_text = false })
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = "echasnovski/mini.icons",
+	},
+	{
 		"brenoprata10/nvim-highlight-colors",
 		event = "VeryLazy",
 	},
