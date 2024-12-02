@@ -1,0 +1,41 @@
+.partNumber { 
+		width: 100%;
+		justify-content: center;
+}
+
+.sectionTitle {
+		text-decoration: underline;
+		justify-content: center;
+		width: 100%;
+}
+
+table, th, td {
+		justify-content: center;
+		text-align: center;
+		border: 1px solid black;
+}
+
+table {
+		margin: 2%;
+		padding: .5%;
+}
+
+td {
+		padding: 5px;
+}
+
+.pageLayout {
+		justify-content: center;
+		text-align: center;
+}
+
+.flex {
+		justify-content: space-between;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+}
+
+.flex > table {
+		width: 45%;
+}

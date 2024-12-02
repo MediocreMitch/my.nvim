@@ -1,92 +1,79 @@
-vim.keymap.set("n", "<leader>/", ":noh<cr>")
-
 --
+--	Adding Keymaps
+--
+local wk = require("which-key")
+wk.add({
+	--
+	--	General Keymaps
+	--
+	{ "<leader>/", mode = "n", ":noh<cr>", desc = "Clear Highlighted" },
+	{ "<leader>pv", mode = "n", ":Ex<cr>", desc = "Open Explorer" },
+	{ "<C-h>", mode = "n", ":wincmd h" },
+	{ "<C-l>", mode = "n", ":wincmd l" },
+	{ "<C-k>", mode = "n", ":wincmd k" },
+	{ "<C-j>", mode = "n", ":wincmd j" },
+	--
+	--	Markdown Keybinds
+	--
+	{ "<C-m>", mode = "n", ":MarkdownPreviewToggle<cr>", desc = "Toggle Markdown Preview" },
+	--
+	--	Lazy Keymaps
+	--
+	{ "<leader>L", mode = "n", ":Lazy<cr>", desc = "Lazy", icon = "󰒲" },
+	--
+	--	Telescope keybinds
+	--
+	{ "<leader>f", group = "Telescope" },
+	{
+		"<leader>fc",
+		mode = "n",
+		function()
+			require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+		end,
+		desc = "Search Config Files",
+	},
+	{ "<leader>ff", mode = "n", ":Telescope find_files<cr>", desc = "Telescope find files" },
+	{ "<leader>fo", mode = "n", ":Telescope oldfiles<cr>", desc = "Telescope find recently opened" },
+	{ "<leader>fg", mode = "n", ":Telescope live_grep<cr>", desc = "Telescope live grep" },
+	{ "<leader>fb", mode = "n", ":Telescope buffers<cr>", desc = "Telescope buffers" },
+	{ "<leader>fht", mode = "n", ":Telescope help_tags<cr>", desc = "Telescope help tags" },
+	{ "<leader>fp", mode = "n", ":Telescope lazy_plugins<CR>", desc = "Telescope plugins" },
+	{ "<leader>fh", mode = "n", ":Telescope helpgrep<CR>", desc = "Telescope help grep" },
+	--	Telescope LSP
+	{ "<leader>fl", group = "LSP Options" },
+	{ "<leader>flr", mode = "n", ":Telescope lsp_references<cr>", desc = "List LSP references for word under cursor" },
+	{ "<leader>fld", mode = "n", ":Telescope diagnostics<cr>", desc = "List LSP diagnostics for open buffer" },
+	{
+		"<leader>flD",
+		mode = "n",
+		":Telescope lsp_definitions<cr>",
+		desc = "Got to definition or show list of definitions",
+	},
+	--
+	-- Snacks Keybinds
+	--
+	{ "<leader>s", group = "Snacks", icon = { icon = "󰐢", color = "orange" } },
+	{ "<leader>sn", group = "Snacks Notification" },
+	-- Snacks.terminal
+	{ "<leader>st", ":lua Snacks.terminal()<cr>", desc = "Toggle Terminal" },
+	-- Snacks.notifier
+	{ "<leader>snh", ":lua Snacks.notifier.show_history()<cr>", desc = "Show Notification History" },
+})
+
 --
 -- Neovide Key Remaps
 --
---
-
 if vim.g.neovide then
 	vim.g.neovide_profiler = false
-	vim.keymap.set("n", "<leader>``", function()
-		vim.g.neovide_profiler = not vim.g.neovide_profiler
-	end)
+	wk.add({
+		{ "<leader>`", group = "Neovide" },
+		{
+			"<leader>``",
+			mode = "n",
+			function()
+				vim.g.neovide_profiler = not vim.g.neovide_profiler
+			end,
+			desc = "Open Neovide Profiler",
+		},
+	})
 end
-
---
---
--- Window Navigation
---
---
-
-vim.keymap.set("n", "<C-h>", function()
-	local prev_win = vim.api.nvim_get_current_win()
-	vim.cmd([[wincmd h]])
-	local current_win = vim.api.nvim_get_current_win()
-	if prev_win == current_win then
-		vim.fn.system("wezterm cli activate-pane-direction Left")
-	end
-end)
-
-vim.keymap.set("n", "<C-l>", function()
-	local prev_win = vim.api.nvim_get_current_win()
-	vim.cmd([[wincmd l]])
-	local current_win = vim.api.nvim_get_current_win()
-	if prev_win == current_win then
-		vim.fn.system("wezterm cli activate-pane-direction Right")
-	end
-end)
-
-vim.keymap.set("n", "<C-k>", function()
-	local prev_win = vim.api.nvim_get_current_win()
-	vim.cmd([[wincmd k]])
-	local current_win = vim.api.nvim_get_current_win()
-	if prev_win == current_win then
-		vim.fn.system("wezterm cli activate-pane-direction Up")
-	end
-end)
-
-vim.keymap.set("n", "<C-j>", function()
-	local prev_win = vim.api.nvim_get_current_win()
-	vim.cmd([[wincmd j]])
-	local current_win = vim.api.nvim_get_current_win()
-	if prev_win == current_win then
-		vim.fn.system("wezterm cli activate-pane-direction Down")
-	end
-end)
-
---
---
---	Nvim Tree Remap
---
---
-
-vim.keymap.set("n", "<leader>pv", function()
-	vim.cmd("NvimTreeOpen")
-	vim.cmd("NvimTreeFocus")
-end)
-
---
---
--- Telescope keybinds
---
---
-local extensions = {
-	"gh",
-	"lazy_plugins",
-	"helpgrep",
-}
-local load_extensions = function()
-	local tele = require("telescope")
-	for _, ext in ipairs(extensions) do
-		tele.load_extension(ext)
-	end
-end
-load_extensions()
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-vim.keymap.set("n", "<leader>fht", builtin.help_tags, { desc = "Telescope help tags" })
-vim.keymap.set("n", "<leader>fp", "<CMD>Telescope lazy_plugins<CR>", { desc = "Telescope plugins" })
-vim.keymap.set("n", "<leader>fh", "<CMD>Telescope helpgrep<CR>", { desc = "Telescope help grep" })
