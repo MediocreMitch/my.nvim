@@ -73,9 +73,9 @@ require("nvim-highlight-colors").setup({
 local mini = require("mini.icons")
 mini.setup()
 
--- Eviline config for lualine
--- Author: shadmansaleh
--- Credit: glepnir
+--
+--	Lualine Config
+--
 local lualine = require("lualine")
 
 -- Color table for highlights
@@ -240,7 +240,7 @@ ins_left({
 			return msg
 		end
 		for _, client in ipairs(clients) do
-			local filetypes = client.config.filetypes
+			local filetypes = client.config.fietypes
 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
 				return client.name
 			end

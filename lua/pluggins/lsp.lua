@@ -1,9 +1,35 @@
 return {
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
-	"neovim/nvim-lspconfig",
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-path",
-	"hrsh7th/cmp-cmdline",
-	"hrsh7th/nvim-cmp",
+	{
+		"williamboman/mason.nvim",
+		event = "VeryLazy",
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		event = "VeryLazy",
+	},
+	{
+		"neovim/nvim-lspconfig",
+		event = "VeryLazy",
+	},
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		event = "VeryLazy",
+	},
+	{
+		"hrsh7th/cmp-path",
+		event = "VeryLazy",
+	},
+	{
+		"hrsh7th/cmp-cmdline",
+		event = "VeryLazy",
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		event = "VeryLazy",
+	},
+	{
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+	},
 }
