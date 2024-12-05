@@ -55,6 +55,7 @@ wk.add({
 			require("which-key").show({ global = false })
 		end,
 		desc = "Buffer Local Keymaps (which-key)",
+		icon = { icon = "⁇", color = "purple" },
 	},
 	--
 	--	Markdown Keybinds
@@ -86,7 +87,7 @@ wk.add({
 		desc = "Grep File Contents",
 	},
 	{ "<leader>ff", mode = "n", ":Telescope find_files<cr>", desc = "Search From CWD" },
-	{ "<leader>fo", mode = "n", ":Telescope oldfiles<cr>", desc = "Search Recently Open" },
+	{ "<leader>fr", mode = "n", ":Telescope oldfiles<cr>", desc = "Search Recently Open" },
 	{ "<leader>fg", mode = "n", ":Telescope live_grep<cr>", desc = "Live Grep" },
 	{ "<leader>fb", mode = "n", ":Telescope buffers<cr>", desc = "Search Buffers" },
 	{ "<leader>fs", mode = "n", ":Telescope symbols<cr>", desc = "Search Symbols" },
@@ -127,4 +128,6 @@ wk.add({
 	{ "<leader>st", ":lua Snacks.terminal()<cr>", desc = "Toggle Terminal" },
 	-- Snacks.notifier
 	{ "<leader>snh", ":lua Snacks.notifier.show_history()<cr>", desc = "Show Notification History" },
+	-- Snacks.scratch
+	{ "<leader>ss", ":lua Snacks.scratch()<cr>", desc = "Open Scratch" },
 })
