@@ -32,4 +32,12 @@ return {
 		opts = {},
 		cmd = "Trouble",
 	},
+	{
+		"rmagatti/goto-preview",
+		event = "BufEnter",
+		opts = {
+			default_mappings = true,
+		},
+		config = true,
+	},
 }

@@ -22,11 +22,11 @@ return {
 			end
 		end,
 	},
-	{
-		dir = "~/projects/kanban.lua",
-		name = "kanban",
-		config = function()
-			require("kanban").setup()
-		end,
-	},
+	-- {
+	-- 	dir = "~/projects/kanban.lua",
+	-- 	name = "kanban",
+	-- 	config = function()
+	-- 		require("kanban").setup()
+	-- 	end,
+	-- },
 }
