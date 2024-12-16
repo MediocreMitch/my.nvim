@@ -48,6 +48,19 @@ require("mason-lspconfig").setup({
 				capabilities = capabilities,
 			})
 		end,
+		["LTex"] = function()
+			require("ltex_extra").setup({
+				server_opts = {
+					capabilities = capabilities,
+					on_attach = function(client, bufnr)
+						-- your on_attach process
+					end,
+					settings = {
+						ltex = {},
+					},
+				},
+			})
+		end,
 		["lua_ls"] = function()
 			require("lspconfig").lua_ls.setup({
 				capabilities = capabilities,

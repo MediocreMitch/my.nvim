@@ -58,9 +58,18 @@ wk.add({
 		icon = { icon = "⁇", color = "purple" },
 	},
 	--
-	--	Markdown Keybinds
+	--	Markdown Open File
 	--
-	{ "<C-m>", mode = "n", ":MarkdownPreviewToggle<cr>", desc = "Toggle Markdown Preview" },
+	{
+		"<leader>m",
+		function()
+			if vim.bo.filetype == "markdown" then
+				local file = vim.fn.getreg("%")
+				vim.api.nvim_command('!"' .. file .. '"')
+			end
+		end,
+		desc = "Open file in browser if it is a Markdown file",
+	},
 	--
 	--	Lazy Keymaps
 	--
@@ -130,4 +139,17 @@ wk.add({
 	{ "<leader>snh", ":lua Snacks.notifier.show_history()<cr>", desc = "Show Notification History" },
 	-- Snacks.scratch
 	{ "<leader>ss", ":lua Snacks.scratch()<cr>", desc = "Open Scratch" },
+	--
+	--	Timestamp
+	--
+	{
+		"<leader>ts",
+		function()
+			local pos = vim.api.nvim_win_get_cursor(0)[2]
+			local line = vim.api.nvim_get_current_line()
+			local nline = line:sub(0, pos) .. os.date() .. line:sub(pos + 1)
+			vim.api.nvim_set_current_line(nline)
+		end,
+		desc = "Insert timestamp (Format: 12/16/2024 3:21:31 PM)",
+	},
 })
