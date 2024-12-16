@@ -40,6 +40,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		--		"pylsp",
 		"ts_ls",
+		"ltex",
 	},
 	automatic_installation = true,
 	handlers = {
@@ -48,15 +49,21 @@ require("mason-lspconfig").setup({
 				capabilities = capabilities,
 			})
 		end,
-		["LTex"] = function()
-			require("ltex_extra").setup({
-				server_opts = {
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						-- your on_attach process
-					end,
-					settings = {
-						ltex = {},
+		["ltex"] = function()
+			require("lspconfig").ltex.setup({
+				capabilities = capabilities,
+				on_attach = function(client, bufnr) -- rest of your on_attach process.
+					require("ltex_extra").setup({
+						load_langs = { "en-US" },
+						path = "~/.local/share/ltex",
+					})
+				end,
+				settings = {
+					ltex = {
+						enabled = { "latex", "markdown" },
+						hiddenFalsePositives = {
+							["en-US"] = ":~/.local/share/ltex/ltex.hiddenFalsePositives.en-US.txt",
+						},
 					},
 				},
 			})
