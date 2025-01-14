@@ -7,3 +7,6 @@ require("config.appearance")
 require("config.help")
 require("config.notetaking")
 require("config.keymaps")
+if os.getenv("USERDOMAIN") == "BLUEORIGIN" then
+	require("config.blue")
+end

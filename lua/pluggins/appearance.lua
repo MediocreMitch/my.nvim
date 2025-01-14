@@ -3,6 +3,20 @@ return {
 		"daneofmanythings/chalktone.nvim",
 	},
 	{
+		"0xstepit/flow.nvim",
+		lazy = false,
+		priority = 1000,
+		tag = "v2.0.0",
+		opts = {
+			colors = {
+				fluo = "orange",
+			},
+			ui = {
+				borders = "fluo",
+			},
+		},
+	},
+	{
 		"shellRaining/hlchunk.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
@@ -17,6 +31,9 @@ return {
 						right_arrow = "─",
 					},
 					style = "#bf3b02",
+					exclude_filetypes = {
+						markdown = true,
+					},
 				},
 			})
 		end,

@@ -5,31 +5,30 @@ vim.opt.tabstop = 4
 vim.opt.scrolloff = 8
 
 vim.opt.wrap = true
+vim.opt.textwidth = 80
+
+require("nvim-treesitter.configs").setup({ highlight = { enable = true } })
 
 --
 --
 -- Neovide Appearance Config
 --
 --
-local alpha = function()
-	return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
-end
 if vim.g.neovide then
-	vim.g.neovide_transparency = 0.8
-	vim.g.transparency = 0.8
-	vim.g.neovide_background_color = "#0f1117" .. alpha()
 	vim.g.neovide_cursor_trail_size = 0.4
 	vim.g.neovide_cursor_animation_length = 0.05
 end
 
 --
---
 -- Neovim Appearance Config
+--
 
 -- Set the colorscheme and set background to transparent
-require("chalktone").setup()
-vim.cmd("colorscheme chalktone")
-
+-- require("chalktone").setup()
+-- vim.cmd("colorscheme chalktone")
+require("flow").setup({})
+vim.cmd("colorscheme flow")
+vim.api.nvim_set_hl(0, "Comment", { fg = "#0f6780" })
 -- Make backgrounds clear
 local higroups = {
 	"Normal",
@@ -66,7 +65,7 @@ vim.opt.termguicolors = true
 --	hsl(281° 82% 56%)
 --	red
 require("nvim-highlight-colors").setup({
-	render = "virtual",
+	exclude_filetypes = { "markdown" },
 })
 
 -- Adding Nerd Icons
@@ -205,6 +204,14 @@ ins_left({
 	"filename",
 	cond = conditions.buffer_not_empty,
 	color = { fg = colors.magenta, gui = "bold" },
+})
+
+ins_left({
+	function()
+		return vim.fn.foldlevel(vim.api.nvim_win_get_cursor(0)[1])
+	end,
+	icon = "f:",
+	color = { fg = colors.orange },
 })
 
 ins_left({ "location" })

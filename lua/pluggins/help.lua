@@ -8,6 +8,11 @@ return {
 			"nvim-telescope/telescope-github.nvim",
 			"catgoose/telescope-helpgrep.nvim",
 			"polirritmico/telescope-lazy-plugins.nvim",
+			"OliverChao/telescope-picker-list.nvim",
+			{
+				dir = "~/projects/notes.nvim",
+				name = "notes",
+			},
 		},
 	},
 	{
@@ -17,4 +22,17 @@ return {
 			preset = "modern",
 		},
 	},
+	{
+		"hedyhli/outline.nvim",
+		event = "VeryLazy",
+		cmd = { "Outline", "OutlineOpen" },
+		opts = {
+			outline_window = {
+				focus_on_open = false,
+			},
+		},
+	},
+	-- {
+	-- 	"lewis6991/hover.nvim",
+	-- },
 }

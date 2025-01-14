@@ -2,6 +2,8 @@
 --- LSP Config
 ---
 
+require("nvim-treesitter.install").prefer_git = false
+
 -- Reserve a space in the gutter
 -- This will avoid an annoying layout shift in the screen
 vim.opt.signcolumn = "yes"
@@ -40,32 +42,13 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		--		"pylsp",
 		"ts_ls",
-		"ltex",
+		"marksman",
 	},
 	automatic_installation = true,
 	handlers = {
 		function(server_name)
 			require("lspconfig")[server_name].setup({
 				capabilities = capabilities,
-			})
-		end,
-		["ltex"] = function()
-			require("lspconfig").ltex.setup({
-				capabilities = capabilities,
-				on_attach = function(client, bufnr) -- rest of your on_attach process.
-					require("ltex_extra").setup({
-						load_langs = { "en-US" },
-						path = "~/.local/share/ltex",
-					})
-				end,
-				settings = {
-					ltex = {
-						enabled = { "latex", "markdown" },
-						hiddenFalsePositives = {
-							["en-US"] = ":~/.local/share/ltex/ltex.hiddenFalsePositives.en-US.txt",
-						},
-					},
-				},
 			})
 		end,
 		["lua_ls"] = function()
@@ -112,44 +95,32 @@ require("mason-lspconfig").setup({
 local cmp = require("cmp")
 
 cmp.setup({
-	sources = {
+	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "path" },
-	},
+	}),
 	mapping = cmp.mapping.preset.insert({
 		-- `Enter` key to confirm completion
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 
 		-- Ctrl+Space to trigger completion menu
 		["<C-Space>"] = function()
-			vim.g.tempbuffs = vim.api.nvim_list_wins()
-			local opts = {
-				relative = "editor",
-				anchor = "NE",
-				style = "minimal",
-				bufpos = { -1, 0 },
-				width = 30, -- vim.api.nvim_get_option_value("width", { buf = cmp_buf }),
-				height = 20, -- vim.api.nvim_get_option_value("height", { buf = cmp_buf }),
-				border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
-				title = "pinned",
-			}
-			vim.api.nvim_open_win(0, false, opts)
-			-- local buffs = {}
-			-- for buf = 1, #temp_buf_holder, 1 do
-			-- 	if
-			-- 		not vim.api.nvim_buf_get_name(temp_buf_holder[buf]) == ""
-			-- 		or vim.api.nvim_buf_get_lines(temp_buf_holder[buf], 0, -1, false) == "null"
-			-- 	then
-			-- 	else
-			-- 		buffs[buf] = {
-			-- 			vim.api.nvim__buf_stats(temp_buf_holder[buf]),
-			-- 			vim.api.nvim_buf_get_name(temp_buf_holder[buf]),
-			-- 			vim.api.nvim_buf_get_lines(temp_buf_holder[buf], 0, -1, false),
-			-- 		}
-			-- 	end
-			-- end
-			-- vim.g.temp_buffs = buffs
+			cmp.mapping.complete()
 		end,
+		-- ["<C-Space>"] = function()
+		-- 	vim.g.tempbuffs = vim.api.nvim_list_wins()
+		-- 	local opts = {
+		-- 		relative = "editor",
+		-- 		anchor = "NE",
+		-- 		style = "minimal",
+		-- 		bufpos = { -1, 0 },
+		-- 		width = 30, -- vim.api.nvim_get_option_value("width", { buf = cmp_buf }),
+		-- 		height = 20, -- vim.api.nvim_get_option_value("height", { buf = cmp_buf }),
+		-- 		border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
+		-- 		title = "pinned",
+		-- 	}
+		-- 	vim.api.nvim_open_win(0, false, opts)
+		-- end,
 
 		-- Scroll up and down in the completion documentation
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
@@ -169,13 +140,17 @@ cmp.setup({
 		max_view_entries = 10,
 	},
 	window = {
-		completion = {
-			border = { "", "", "", "", "", "", "", "" },
-		},
-		documentation = {
-			border = { "", "", "", "", "", "", "", "" },
-		},
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
+	-- window = {
+	-- 	completion = {
+	-- 		border = { "", "", "", "", "", "", "", "" },
+	-- 	},
+	-- 	documentation = {
+	-- 		border = { "", "", "", "", "", "", "", "" },
+	-- 	},
+	-- },
 })
 
 cmp.setup.cmdline(":", {

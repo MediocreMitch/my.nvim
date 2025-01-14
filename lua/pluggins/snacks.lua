@@ -81,10 +81,26 @@ return {
 							action = ":lua Snacks.dashboard.pick('oldfiles')",
 						},
 						{
+							icon = "󰷈 ",
+							key = "n",
+							desc = "Search WorkNotes",
+							enabled = os.getenv("USERDOMAIN") == "BLUEORIGIN",
+							action = ":lua require('telescope.builtin').find_files({cwd = '~/OneDrive - Blue Origin, LLC/WorkNotes'})",
+						},
+						{
+							icon = "󰷈 ",
+							key = "d",
+							desc = "Daily Note",
+							enabled = os.getenv("USERDOMAIN") == "BLUEORIGIN",
+							action = ":edit ~/OneDrive - Blue Origin, LLC/WorkNotes/DailyNotes/"
+								.. os.date("%m-%d-%Y")
+								.. ".md",
+						},
+						{
 							icon = " ",
 							key = "c",
 							desc = "Config",
-							action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+							action = ":lua require('telescope.builtin').find_files({cwd = '~/.config/nvim'})",
 						},
 						{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy },
 						{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
