@@ -1,12 +1,9 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 require("config.lazy")
-require("config.lsp_n_formatting_config")
-require("config.appearance")
-require("config.help")
-require("config.notetaking")
-require("config.keymaps")
-if os.getenv("USERDOMAIN") == "BLUEORIGIN" then
-	require("config.blue")
-end
+require("config.lsp")
+
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.shiftwidth = 3
+vim.o.tabstop = 3
+vim.o.cot = "fuzzy,menuone,noselect,popup"
+vim.cmd([[colorscheme tokyonight-night]])
