@@ -2,6 +2,7 @@ return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {
+		preset = "modern",
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
@@ -21,8 +22,7 @@ return {
 		{ "<cr>", "za" },
 		{ "<leader>/", ":noh<cr>", desc = "Clear Highlighted" },
 		{ "<leader>pv", ":Ex<cr>", desc = "Open Explorer" },
-		--	Which Key Reveal Current Buffer Binds
-		--
+		----	Which Key Reveal Current Buffer Binds
 		{
 			"<leader>?",
 			function()
@@ -30,26 +30,15 @@ return {
 			end,
 			desc = "Buffer Local Keymaps (which-key)",
 		},
-		--
-		--	Lazy Keymaps
-		--
+		----	Lazy Keymaps
 		{ "<leader>L", ":Lazy<cr>", desc = "Lazy" },
-		--
-		--	Telescope keybinds
-		--
+		----	Telescope keybinds
 		{
 			"<leader>fc",
 			function()
 				require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
 			end,
 			desc = "Search for File",
-		},
-		{
-			"<leader>fp",
-			function()
-				require("telescope.builtin").find_files({ cwd = "~/projects" })
-			end,
-			desc = "Find Project Files",
 		},
 		{ "<leader>ff", ":Telescope find_files<cr>", desc = "Search From CWD" },
 		{ "<leader>fr", ":Telescope oldfiles<cr>", desc = "Search Recently Open" },
@@ -65,9 +54,7 @@ return {
 			desc = "Grep File Contents",
 		},
 		{ "<leader>gf", ":Telescope live_grep<cr>", desc = "Live Grep" },
-		{ "<leader>gh", ":Telescope helpgrep<cr>", desc = "Help Grep" },
-		{ "<leader>tp", ":Telescope picker_list<cr>", desc = "Picker List" },
-		--	Telescope LSP
+		----	Telescope LSP
 		{ "<leader>fl", group = "Telescope LSP Options" },
 		{
 			"<leader>flr",
@@ -80,24 +67,5 @@ return {
 			":Telescope lsp_definitions<cr>",
 			desc = "Got to definition or show list of definitions",
 		},
-		--
-		--	Trouble Keybind
-		--
-		{ "<leader>x", group = "Diagnostics" },
-		{ "<leader>c", group = "LSP Nav Toggles" },
-		{ "<leader>xx", ":Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-		{
-			"<leader>xX",
-			":Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Buffer Diagnostics (Trouble)",
-		},
-		{ "<leader>cs", ":Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-		{
-			"<leader>cl",
-			":Trouble lsp toggle focus=false win.position=right<cr>",
-			desc = "LSP Definitions / references / ... (Trouble)",
-		},
-		{ "<leader>xL", ":Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-		{ "<leader>xQ", ":Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 	},
 }
