@@ -70,13 +70,12 @@ wk.add({
 	----	Lazy Keymaps
 	{ "<leader>L", ":Lazy<cr>", desc = "Lazy" },
 	---- Conform
-	{ "<leader>c", desc = "Conform", icon = "󱅧" },
 	{
-		"<leader>cf",
+		"<leader>c",
 		function()
 			require("conform").format({ async = true })
 		end,
-		mode = "",
-		desc = "Format buffer",
+		desc = "Conform",
+		icon = "󱅧",
 	},
 })
