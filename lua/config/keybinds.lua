@@ -54,6 +54,8 @@ wk.add({
 	{ "<C-=>", ":wincmd +<cr>" },
 	{ "<C-->", ":wincmd -<cr>" },
 	{ "<C-x>", ":wincmd x<cr>" },
+	{ "<C-L>", ":bNext<cr>"},
+	{ "<C-H>", ":bprevious<cr>"},
 	---- Toggle Folds
 	{ "<cr>", "za" },
 	---- Generic keymaps

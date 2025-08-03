@@ -1,4 +1,35 @@
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = "󰠠 ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+	float = {
+		border = "rounded",
+		format = function(d)
+			return ("%s (%s) [%s]"):format(d.message, d.source, d.code or d.user_data.lsp.code)
+		end,
+	},
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("my.lsp", {}),
+	callback = function(args)
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+		if client:supports_method("textDocument/completion") then
+			vim.lsp.completion.enable(true, client.id, client.bufnr, {
+				autotrigger = true,
+			})
+		end
+	end,
+})
+
 vim.lsp.config("lua_ls", {
+
 	on_init = function(client)
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
@@ -32,20 +63,7 @@ vim.lsp.config("lua_ls", {
 					"${3rd}/luv/library",
 					-- '${3rd}/busted/library'
 				},
-				-- Or pull in all of 'runtimepath'.
-				-- NOTE: this is a lot slower and will cause issues when working on
-				-- your own configuration.
-				-- See https://github.com/neovim/nvim-lspconfig/issues/3189
-				-- library = {
-				--   vim.api.nvim_get_runtime_file('', true),
-				-- }
 			},
-		})
-	end,
-
-	on_attach = function(client, bufnr)
-		vim.lsp.completion.enable(true, client.id, bufnr, {
-			autotrigger = true,
 		})
 	end,
 
