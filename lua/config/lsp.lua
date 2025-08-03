@@ -1,5 +1,4 @@
 vim.diagnostic.config({
-	virtual_text = true,
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = " ",
@@ -21,7 +20,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 		if client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, client.bufnr, {
+			vim.lsp.completion.enable(true, client.id, 0, {
 				autotrigger = true,
 			})
 		end
@@ -29,7 +28,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.lsp.config("lua_ls", {
-
 	on_init = function(client)
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name

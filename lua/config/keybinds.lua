@@ -1,5 +1,21 @@
 local wk = require("which-key")
 wk.add({
+	---- LSP
+	{
+		"<C-l>",
+		function()
+			vim.lsp.completion.get()
+		end,
+		mode = "i",
+		desc = "Trigger autocomplete",
+	},
+	{
+		"<C-r>",
+		function()
+			vim.diagnostic.open_float()
+		end,
+		desc = "Show error in floating window",
+	},
 	---- Telescope
 	{ "<leader>f", desc = "Telescope" },
 	{
@@ -54,8 +70,8 @@ wk.add({
 	{ "<C-=>", ":wincmd +<cr>" },
 	{ "<C-->", ":wincmd -<cr>" },
 	{ "<C-x>", ":wincmd x<cr>" },
-	{ "<C-L>", ":bNext<cr>"},
-	{ "<C-H>", ":bprevious<cr>"},
+	{ "<C-L>", ":bNext<cr>" },
+	{ "<C-H>", ":bprevious<cr>" },
 	---- Toggle Folds
 	{ "<cr>", "za" },
 	---- Generic keymaps
